@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/fmma/sort-markdown-tables/issues"
   },
-  "homepage": "https://github.com/fmma/sort-markdown-tables#readme"
+  "bin": {
+    "sort-markdown-tables": "cli.js"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://github.com/fmma/sort-markdown-tables#readme",
+  "devDependencies": {
+    "@types/node": ">=0.10.0"
+  }
 }
