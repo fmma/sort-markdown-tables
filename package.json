@@ -1,6 +1,6 @@
 {
   "name": "@fmma-npm/sort-markdown-tables",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sort markdown tables",
   "main": "index.js",
   "scripts": {
