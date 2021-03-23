@@ -1,8 +1,7 @@
 {
   "name": "@fmma-npm/sort-markdown-tables",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sort markdown tables",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +20,7 @@
     "url": "https://github.com/fmma/sort-markdown-tables/issues"
   },
   "bin": {
-    "sort-markdown-tables": "cli.js"
+    "sort-markdown-tables": "lib/cli.js"
   },
   "engines": {
     "node": ">=0.10.0"

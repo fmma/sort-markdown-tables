@@ -1,22 +1,54 @@
+#!/usr/bin/env node
+
 import { readFileSync, writeFileSync } from 'fs';
 import { argv } from 'process'
 
-const inplace = argv[2] === '-i';
-const fp = inplace ? argv[3] : argv[2];
+const args = argv.slice(2);
+const flags = args.filter(arg => arg.startsWith('-'));
+const files = args.filter(arg => !arg.startsWith('-'));
 
-function sortTable(tableString: string) {
-    const [header, hr, ...lines] = tableString.trim().split('\r\n');
-    return [header, hr, ... lines.sort()].join('\r\n');
+const inplace = flags.includes('-i');
+const allTables = flags.includes('-a');
+
+for(const file of files) {
+    doFile(file);
 }
-const content = readFileSync(fp).toString();
 
-const sorted = content.replace(/(<!-- sort-table -->\s*)(((\|[^|\r\n]*)+\|(\r?\n|\r)?)+)/g, (_, p1, p2) => {
-    return [p1, sortTable(p2), ''].join('\r\n');
-});
+function doFile(fp: string) {
+    const content = readFileSync(fp).toString();
+    const linebreak = getLineBreakChar(content);
+    const sorted = allTables 
+        ? content.replace(linebreak.regex, (a) => {
+            return sortTable(a, linebreak.char);
+        })
+        : content.replace(new RegExp(`${/(<!-- sort-table -->\s*)/.source}(${linebreak.regex.source})`, 'g'), (_, p1, p2) => {
+            return [p1, sortTable(p2, linebreak.char), ''].join(linebreak.char);
+        })
 
-if(inplace) {
-    writeFileSync(fp, sorted);
+    if(inplace) {
+        writeFileSync(fp, sorted);
+    }
+    else {
+        console.log(sorted);
+    }
 }
-else {
-    console.log(sorted);
+
+function sortTable(tableString: string, linebreak: string) {
+    const [header, hr, ...lines] = tableString.trim().split(linebreak);
+    return [header, hr, ... lines.sort()].join(linebreak);
+}
+
+function getLineBreakChar(string: string) {
+    const indexOfLF = string.indexOf('\n', 1);  // No need to check first-character
+
+    if (indexOfLF === -1) {
+        if (string.indexOf('\r') !== -1) return { char: '\r', regex: /((\|[^|\r]*)+\|\r?)+/g};
+
+        return { char: '\n', regex: /((\|[^|\n]*)+\|\n?)+/g};
+    }
+
+    if (string[indexOfLF - 1] === '\r') 
+        return { char: '\n', regex: /((\|[^|\r\n]*)+\|(\r\n)?)+/g};
+
+    return { char: '\n', regex: /((\|[^|\n]*)+\|\n?)+/g};
 }
