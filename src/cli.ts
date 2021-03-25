@@ -34,8 +34,13 @@ function doFile(fp: string) {
 }
 
 function sortTable(tableString: string, linebreak: string) {
-    const [header, hr, ...lines] = tableString.trim().split(linebreak);
-    return [header, hr, ... lines.sort()].join(linebreak);
+    const [header, hr, ...lines] = tableString.split(linebreak);
+    const endingWhitespace = lines.pop();
+    if(endingWhitespace != null && endingWhitespace.trim() !== '') {
+        lines.push(endingWhitespace);
+        return [header.trim(), hr.trim(), ... lines.sort()].join(linebreak);
+    }
+    return [header.trim(), hr.trim(), ... lines.sort(), endingWhitespace].join(linebreak);
 }
 
 function getLineBreakChar(string: string) {
@@ -48,7 +53,7 @@ function getLineBreakChar(string: string) {
     }
 
     if (string[indexOfLF - 1] === '\r') 
-        return { char: '\n', regex: /((\|[^|\r\n]*)+\|(\r\n)?)+/g};
+        return { char: '\r\n', regex: /((\|[^|\r\n]*)+\|(\r\n)?)+/g};
 
     return { char: '\n', regex: /((\|[^|\n]*)+\|\n?)+/g};
 }
