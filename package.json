@@ -1,9 +1,9 @@
 {
   "name": "@fmma-npm/sort-markdown-tables",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Sort markdown tables",
   "scripts": {
-    "prepublish": "tsc",
+    "prepublishOnly": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
