@@ -8,7 +8,7 @@ const flags = args.filter(arg => arg.startsWith('-'));
 const files = args.filter(arg => !arg.startsWith('-'));
 
 if(flags.includes('-v') || flags.includes('--version')) {
-    console.log('1.0.6');
+    console.log('1.0.8');
     process.exit();
 }
 
