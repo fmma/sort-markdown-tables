@@ -1,6 +1,6 @@
 {
   "name": "@fmma-npm/sort-markdown-tables",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Sort markdown tables",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
