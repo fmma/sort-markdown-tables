@@ -35,12 +35,14 @@ function doFile(fp: string) {
 
 function sortTable(tableString: string, linebreak: string) {
     const [header, hr, ...lines] = tableString.split(linebreak);
+    if(lines == null || lines.length === 0 || !/[\s\|:-]*/.test(hr))
+        return tableString;
     const endingWhitespace = lines.pop();
     if(endingWhitespace != null && endingWhitespace.trim() !== '') {
         lines.push(endingWhitespace);
-        return [header.trim(), hr.trim(), ... lines.sort()].join(linebreak);
+        return [header, hr, ... lines.sort()].join(linebreak);
     }
-    return [header.trim(), hr.trim(), ... lines.sort(), endingWhitespace].join(linebreak);
+    return [header, hr, ... lines.sort(), endingWhitespace].join(linebreak);
 }
 
 function getLineBreakChar(string: string) {
