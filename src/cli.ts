@@ -22,7 +22,7 @@ function doFile(fp: string) {
             return sortTable(a, linebreak.char);
         })
         : content.replace(new RegExp(`${/(<!-- sort-table -->\s*)/.source}(${linebreak.regex.source})`, 'g'), (_, p1, p2) => {
-            return [p1, sortTable(p2, linebreak.char), ''].join(linebreak.char);
+            return p1 + sortTable(p2, linebreak.char);
         })
 
     if(inplace) {
