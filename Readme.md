@@ -9,18 +9,30 @@ Sort a markdown table by the first column.
 Add `<!-- sort-table -->` in the markdown (Readme.md) file above the table:
 ```markdown
 <!-- sort-table -->
-| Unsorted | Table |
-| -------- | ----- |
-| xxx      | aaa   |
-| aaa      | bbb   |
-| bbb      | xxx   |
-| yyy      | qqq   |
+| Unsorted | Table            |
+| -------- | ---------------- |
+| xxx      | should be third  |
+| aaa      | should be first  |
+| bbb      | should be second |
+| yyy      | should be forth  |
 ```
 
 Run the command:
 
 ```
 $ sort-markdown-tables Readme.md
+```
+
+The output is
+
+```markdown
+<!-- sort-table -->
+| Unsorted | Table            |
+| -------- | ---------------- |
+| aaa      | should be first  |
+| bbb      | should be second |
+| xxx      | should be third  |
+| yyy      | should be forth  |
 ```
 
 Make the change inplace with the `-i` flag:

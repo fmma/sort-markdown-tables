@@ -1,26 +1,34 @@
-Not a table
-```
-exp ::= x
-| c |
-| b |
-```
 
-ccc
-bbb
-aaa
+# Example from readme
 
 <!-- sort-table -->
+| Unsorted | Table            |
+| -------- | ---------------- |
+| xxx      | should be third  |
+| aaa      | should be first  |
+| bbb      | should be second |
+| yyy      | should be forth  |
 
-| Unsorted | Table |
-| -------- | ----- |
-| aaa      | bbb   |
-| xxx      | aaa   |
-| bbb      | xxx   |
-| yyy      | qqq   |
+these lines should not be sorted:
 cc
 bb
 aa
 
+
+# Example from readme without \<!-- sort-table --\>
+
+| Unsorted | Table            |
+| -------- | ---------------- |
+| xxx      | should be third  |
+| aaa      | should be first  |
+| bbb      | should be second |
+| yyy      | should be forth  |
+
+cc
+bb
+aa
+
+# Tiny already sorted table
 <!-- sort-table -->
 
 | Unsorted | Table |
@@ -32,7 +40,18 @@ c
 b
 a
 
+# Not a table
+```
+exp ::= x
+| x |
+| a |
+```
 
+ccc
+bbb
+aaa
+
+# More realistic example
 
 <!-- sort-table -->
 | Name                               | get/set                           | Type                                             | Default     | Description                                                                                  |
