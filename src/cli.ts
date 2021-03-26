@@ -7,8 +7,24 @@ const args = argv.slice(2);
 const flags = args.filter(arg => arg.startsWith('-'));
 const files = args.filter(arg => !arg.startsWith('-'));
 
-const inplace = flags.includes('-i');
-const allTables = flags.includes('-a');
+if(flags.includes('-v') || flags.includes('--version')) {
+    console.log('1.0.6');
+    process.exit();
+}
+
+if(flags.includes('-h') || flags.includes('--help')) {
+    console.log('Usage: sort-markdown-tables [OPTIONS] README.MD...');
+    console.log('Sort tables preceeded with \'<!-- sort-table -->\' in README.MD file(s) and write to standard output.');
+    console.log();
+    console.log('  -a, --all       sort all tables regardless of \'<!-- sort-table -->\'');
+    console.log('  -h, --help      show this help');
+    console.log('  -i, --inplace   overwrite the input file(s) with the result instead of outputting to standard output');
+    console.log('  -v, --version   prints the version number');
+    process.exit();
+}
+
+const inplace = flags.includes('-i') || flags.includes('--inplace');
+const allTables = flags.includes('-a') || flags.includes('--all');
 
 for(const file of files) {
     doFile(file);
